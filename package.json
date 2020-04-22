@@ -1,0 +1,20 @@
+{
+  "name": "2020ss-webcom-request",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marius220699/2020ss-iot2-webcom-request.git"
+  },
+  "author": "marius",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marius220699/2020ss-iot2-webcom-request/issues"
+  },
+  "homepage": "https://github.com/marius220699/2020ss-iot2-webcom-request#readme"
+}
