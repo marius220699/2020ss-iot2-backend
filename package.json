@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/marius220699/2020ss-iot2-webcom-request/issues"
   },
-  "homepage": "https://github.com/marius220699/2020ss-iot2-webcom-request#readme"
+  "homepage": "https://github.com/marius220699/2020ss-iot2-webcom-request#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cors": "^2.8.5"
+  }
 }

@@ -2,6 +2,8 @@ const axios = require('axios').default;
 const express = require('express');
 
 const app = express();
+const cors = require('cors');
+    app.use(cors());
 
 let output ='';
 
@@ -22,7 +24,7 @@ app.get('/user/:uid', (req, res) => {
 
 app.get('/mensa/:day', (req, res) => {
   if (req.params.day === 'Di') {
-    res.send(data);
+    res.send(database);
   } else {
     res.status(404).send('404');
   }  
