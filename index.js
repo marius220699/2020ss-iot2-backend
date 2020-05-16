@@ -1,35 +1,34 @@
 const axios = require('axios').default;
 const express = require('express');
+const mongo = require('mongodb');
+const cors = require('cors');
 
 const app = express();
-const cors = require('cors');
     app.use(cors());
+    app.use(express.json());
 
-let data ='';
+async function initMongoDB() {
+   const client = await mongo.connect('mongodb://localhost:27017/mensa')
+     // eslint-disable-next-line no-console
+     .catch((err) => { console.log(err); });
+   const db = await client.db();
+   }
+  initMongoDB();
 
-axios({
-  method: 'GET',
-  url: 'https://gist.githubusercontent.com/fg-uulm/666847dd7f11607fc2b6234c6d84d188/raw/2ca994ada633143903b10b2bf7ada3fd039cae35/mensa.json'
-  
-  responseType: 'json',
-  
-})
-.then((response)=>{
-  const result = response.data;
-  console.log(result);
-});
+  let data = '';
+const uri = 'https://gist.githubusercontent.com/fg-uulm/666847dd7f11607fc2b6234c6d84d188/raw/2ca994ada633143903b10b2bf7ada3fd039cae35/mensa.json';
 
-//app.get('/user/:uid', (req, res) => {
-  //res.send(`User ID is set to ${req.params.uid}`);
-  //});
+async function getData() {
+  await axios.get(uri)
+    .then((req) => {
+      data = req.data;
+    })
+    .catch(() => {
+      data = undefined;
+    });
+}
+getData();
 
-//app.get('/mensa/:day', (req, res) => {
-  //if (req.params.day === 'Di') {
-    //res.send(data);
-  //} else {
-   // res.status(404).send('404');
-  //}  
-//});
 app.get('/mensa/:day', (req, res) => {
   if (data !== undefined) {
     switch (req.params.day) {
