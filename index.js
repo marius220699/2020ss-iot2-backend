@@ -56,6 +56,7 @@ app.get('/api/getData/', async (req, res) => {
 app.post('/api/addData/:day', async (req, res) => {
   const client = await mongo.connect("mongodb://localhost:27017/mensa").catch(err => { console.log(err); });
   const db = await client.db();
+  let getresult = await db.collection('essen').find({name : "Nudelsuppe"}).toArray();
   try {
     if (valid(req.body)) {
       await createOrUpdate(req.body, db);
