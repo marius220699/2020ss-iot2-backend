@@ -8,35 +8,36 @@ const app = express();
     app.use(cors());
     app.use(express.json());
 
-async function getData() {
-   const client = await mongo.connect('mongodb://localhost:27017/mensa')
-     // eslint-disable-next-line no-console
-     .catch((err) => { console.log(err); });
-   const db = await client.db();
-   await axios.get(url)
-    .then(async (response) => {
-      response.data.forEach(async d => {
-        createOrUpdate(d, db);
-      });
-   })
-   .catch(e => {
-    console.log(e);
-  });
-}
+    async function getData() {
+      const client = await mongo.connect("mongodb://localhost:27017/mensa").catch(err => { console.log(err); });
+      const db = await client.db();
+      await axios.get(url)
+        .then(async (response) => {
+          response.data.forEach(async d => {
+            createOrUpdate(d, db);
+          });
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
 
-async function createOrUpdate(object, db) {
-  const r = await db.collection('essen').findOne({category: object.category, day: object.day});
 
-  if (r) {
-    await db.collection('essen').replaceOne({category: object.category, day: object.day}, object);
-  } else {
-    await db.collection('essen').insertOne(object);
-  }
-}
+    async function createOrUpdate(object, db) {
+      const r = await db.collection('essen').findOne({category: object.category, day: object.day});
+    
+      if (r) {
+        await db.collection('essen').replaceOne({category: object.category, day: object.day}, object);
+      } else {
+        await db.collection('essen').insertOne(object);
+      }
+    }
 
-function valid(input) {
-  return input.hasOwnProperty("day") && input.hasOwnProperty("category") && input.hasOwnProperty("name");
-}
+    function valid(input) {
+      return input.hasOwnProperty("day") && input.hasOwnProperty("category") && input.hasOwnProperty("name");
+    }
+  
+
 
 getData();
 setInterval(getData, 5000);
