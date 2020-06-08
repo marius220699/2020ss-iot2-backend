@@ -26,8 +26,6 @@ async function start() {
       console.log(e);
     });
   }
-  
-
 
 
 async function createOrUpdate(object, db) {
@@ -119,3 +117,4 @@ app.listen(3000, () => {
 });
 
 }
+start();
